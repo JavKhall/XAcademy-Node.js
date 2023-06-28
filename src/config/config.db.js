@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize')
 
 const sequelize = new Sequelize({
   dialect: "sqlite",
-  storage: "../database/db.sqlite"
+  storage: "../database/database.sqlite"
 })
 
 const initDataBase = async () => {

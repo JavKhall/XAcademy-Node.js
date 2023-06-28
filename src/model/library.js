@@ -21,7 +21,14 @@ const Library = sequelize.define('Libary', {
   phone: {
     type: DataTypes.STRING,
     allowNull: null
+  },
+  status: {
+    type: DataTypes.STRING,
+    defaultValue: 'ENABLE' 
   }
+}, 
+{
+  timestamps: false
 })
 
 module.exports = Library
