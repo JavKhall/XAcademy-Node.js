@@ -16,9 +16,14 @@ const upDateLibrary = async (idLibrary, data) => {
   return await libraryProvider.upDateLibrary (idLibrary, data)
 }
 
+const deleteLibrary = async (idLibrary) => {
+  return await libraryProvider.deleteLibrary (idLibrary)
+}
+
 module.exports = {
   createLibrary,
   getLibraries,
   getLibrary,
-  upDateLibrary
+  upDateLibrary,
+  deleteLibrary
 }

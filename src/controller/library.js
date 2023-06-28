@@ -38,9 +38,19 @@ const upDateLibrary = async (req, res) => {
   }
 }
 
+const deleteLibrary = async (req, res) => {
+  try {
+    const library = await libraryService.deleteLibrary( req.params.id )
+    res.json({message: `Se elimino la libreria: ${library.name}`})
+  } catch (err) {
+    res.status(400).json({action: "deleteLibrery", error: err.message })
+  }
+}
+
 module.exports = {
   createLibrary,
   getLibraries,
   getLibrary,
-  upDateLibrary
+  upDateLibrary,
+  deleteLibrary
 }

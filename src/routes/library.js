@@ -11,4 +11,6 @@ router.get('/:id', libraryController.getLibrary)
 
 router.put('/:id', libraryController.upDateLibrary)
 
+router.delete('/:id', libraryController.deleteLibrary)
+
 module.exports = router
