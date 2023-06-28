@@ -26,20 +26,21 @@ const getLibraries = async () => {
   }
 }
 
-// * OBTENCION de una libreria en particular
+// * OBTENCION de una libreria 
 const getLibrary = async (idLibrary) => {
   try {
     const library = await libraryModel.findByPk(idLibrary, {
       where: { status: 'ENABLE' }
     })
-    return library
+    const { id, name, location, phone} = library
+    return { id, name, location, phone}
   } catch(err) {
     console.error(`Error al obtener la libreria con el id ${idLibrary}`, err)
     throw err
   }
 }
 
-// * ACTUALIZACION de una libreria en particular
+// * ACTUALIZACION de una libreria 
 const upDateLibrary = async (idLibrary, data) => {
   try {
     await libraryModel.update({
