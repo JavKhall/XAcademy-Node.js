@@ -4,7 +4,7 @@ const { libraryModel, bookModel } = require('../model')
 const createLibrary = async (library) => {
   try {
     const newLibrary = await libraryModel.create(library)
-    const { id, name, location, phone} = newLibrary
+    const { id, name, location, phone } = newLibrary
     return { id, name, location, phone}
   } catch(err) {
     console.error("Error al registrar la libreria", err)

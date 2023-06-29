@@ -27,15 +27,15 @@ const getBooks = async () => {
 }
 
 // * OBTENCION un libro
-const getBook = async (idbook) => {
+const getBook = async (idBook) => {
   try {
-    const book = await bookModel.findByPk(idbook, {
+    const book = await bookModel.findByPk(idBook, {
       where: { status: 'ENABLE' }
     })
     const { id, isbn, tittle, author, year, idLibrary } = book
     return { id, isbn, tittle, author, year, idLibrary }
   } catch(err) {
-    console.error(`Error al obtener el libro con el id ${idbook}`, err)
+    console.error(`Error al obtener el libro con el id ${idBook}`, err)
     throw err
   }
 }
