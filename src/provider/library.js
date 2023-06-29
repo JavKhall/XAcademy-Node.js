@@ -1,4 +1,4 @@
-const { libraryModel } = require('../model')
+const { libraryModel, bookModel } = require('../model')
 
 // * CREACION de la libreria
 const createLibrary = async (library) => {
@@ -16,8 +16,12 @@ const createLibrary = async (library) => {
 const getLibraries = async () => {
   try {
     const library = await libraryModel.findAll({
+      attributes: ['id', 'name', 'location', 'phone'],
       where: { status: 'ENABLE' },
-      attributes: ['id', 'name', 'location', 'phone']
+      include: [{ 
+        all: true,
+        attributes: ['id', 'isbn', 'author', 'tittle', 'year']
+      }]
     })
     return library
   } catch(err) {
@@ -30,10 +34,15 @@ const getLibraries = async () => {
 const getLibrary = async (idLibrary) => {
   try {
     const library = await libraryModel.findByPk(idLibrary, {
-      where: { status: 'ENABLE' }
+      where: { status: 'ENABLE' },
+      include: [{ 
+        all: true,
+        where: { status: "ENABLE" },
+        attributes: ['id', 'isbn', 'author', 'tittle', 'year']
+      }]
     })
-    const { id, name, location, phone} = library
-    return { id, name, location, phone}
+    const { id, name, location, phone, Books} = library
+    return { id, name, location, phone, Books}
   } catch(err) {
     console.error(`Error al obtener la libreria con el id ${idLibrary}`, err)
     throw err

@@ -1,6 +1,5 @@
 const { DataTypes, literal } = require('sequelize')
 const { sequelize } = require('../config/config.db')
-const Library  = require('./library')
 
 const Book = sequelize.define('Book', {
   id: {
@@ -38,9 +37,9 @@ const Book = sequelize.define('Book', {
     type: DataTypes.STRING, 
     defaultValue: "ENABLE"
   }
+},
+{
+  timestamps: false
 })
-
-Library.hasOne(Book, { foreignKey: 'idLibrary' });
-Book.belongsTo(Library);
 
 module.exports = Book

@@ -56,18 +56,18 @@ const upDatebook = async (idbook, data) => {
 }
 
 // * "ELIMINACION" de un libro
-const deletebook = async (idbook) => {
+const deleteBook = async (idBook) => {
   try {
     await bookModel.update({ status: "DISABLE" }, { 
       where: {id: idbook}
     })
 
-    const book = await bookModel.findByPk(idbook, {
-      attributes: ['name']
+    const book = await bookModel.findByPk(idBook, {
+      attributes: ['tittle']
     })
     return book
   } catch(err) {
-    console.error(`Error al eliminar el libro con el id ${idbook}`, err)
+    console.error(`Error al eliminar el libro con el id ${idBook}`, err)
     throw err
   }
 }
@@ -77,5 +77,5 @@ module.exports = {
   getBooks,
   getbook, 
   upDatebook,
-  deletebook
+  deleteBook
 }
