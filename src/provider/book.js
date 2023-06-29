@@ -27,7 +27,7 @@ const getBooks = async () => {
 }
 
 // * OBTENCION un libro
-const getbook = async (idbook) => {
+const getBook = async (idbook) => {
   try {
     const book = await bookModel.findByPk(idbook, {
       where: { status: 'ENABLE' }
@@ -41,16 +41,16 @@ const getbook = async (idbook) => {
 }
 
 // * ACTUALIZACION de un libro
-const upDatebook = async (idbook, data) => {
+const upDateBook = async (idBook, data) => {
   try {
     await bookModel.update({
       ...data
     }, { 
-      where: { id: idbook }
+      where: { id: idBook }
     })
-    return await bookModel.findByPk(idbook)
+    return await bookModel.findByPk(idBook)
   } catch(err) {
-    console.error(`Error al actualizar el libro con el id ${idbook}`, err)
+    console.error(`Error al actualizar el libro con el id ${idBook}`, err)
     throw err
   }
 }
@@ -59,7 +59,7 @@ const upDatebook = async (idbook, data) => {
 const deleteBook = async (idBook) => {
   try {
     await bookModel.update({ status: "DISABLE" }, { 
-      where: {id: idbook}
+      where: {id: idBook}
     })
 
     const book = await bookModel.findByPk(idBook, {
@@ -75,7 +75,7 @@ const deleteBook = async (idBook) => {
 module.exports = {
   createBook,
   getBooks,
-  getbook, 
-  upDatebook,
+  getBook, 
+  upDateBook,
   deleteBook
 }

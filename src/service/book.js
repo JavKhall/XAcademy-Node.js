@@ -9,7 +9,7 @@ const getBooks = async () => {
 }
 
 const getBook = async (idBook) => {
-  return await bookProvider.getbook (idBook)
+  return await bookProvider.getBook (idBook)
 }
 
 const upDateBook = async (idBook, data) => {
