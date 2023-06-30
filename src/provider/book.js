@@ -48,7 +48,11 @@ const upDateBook = async (idBook, data) => {
     }, { 
       where: { id: idBook }
     })
-    return await bookModel.findByPk(idBook)
+
+    const book = await bookModel.findByPk(idBook, {
+      attributes: ['id', 'isbn', 'tittle', 'author', 'year', 'idLibrary']
+    })
+    return book
   } catch(err) {
     console.error(`Error al actualizar el libro con el id ${idBook}`, err)
     throw err

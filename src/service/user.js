@@ -12,6 +12,10 @@ const getUser = async (idUser) => {
   return await userProvider.getUser (idUser)
 }
 
+const validateUser = async (options) => {
+  return await userProvider.validateUser (options)
+}
+
 const upDateUser = async (idUser, data) => {
   return await userProvider.upDateUser (idUser, data)
 }
@@ -24,6 +28,7 @@ module.exports = {
   createUser,
   getUsers,
   getUser,
+  validateUser,
   upDateUser,
   deleteUser
 }

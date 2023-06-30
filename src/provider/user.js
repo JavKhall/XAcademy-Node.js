@@ -40,6 +40,25 @@ const getUser = async (idUser) => {
   }
 }
 
+const validateUser = async (options) => {
+  try {
+    const user = await userModel.findAll({
+      where: {
+        username: options.username,
+        password: options.password
+      }
+    })
+    if (user.length != 0) {
+      return user
+    }
+    return false
+  } catch(err) {
+      console.error("No se encuentra el usuario", err)
+      throw err
+  }
+}
+
+
 // * ACTUALIZACION de un usuario
 const upDateUser = async (idUser, data) => {
   try {
@@ -77,7 +96,8 @@ const deleteUser = async (idUser) => {
 module.exports = {
   createUser,
   getUsers,
-  getUser, 
+  getUser,
+  validateUser, 
   upDateUser,
   deleteUser
 }

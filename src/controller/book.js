@@ -1,4 +1,4 @@
-const { bookService } = require('../service')
+const { bookService, libraryService } = require('../service')
 
 const createBook = async (req, res) => {
   try {
@@ -31,7 +31,10 @@ const upDateBook = async (req, res) => {
   try {
     const idBook = req.params.id
     const { isbn, tittle, author, year, idLibrary } = req.body
+    
     const book = await bookService.upDateBook(idBook, { isbn, tittle, author, year, idLibrary })
+    
+    
     res.json(book)
   } catch (err) {
     res.status(400).json({action: "upDateBook", error: err.message })

@@ -34,16 +34,30 @@ const getLibraries = async () => {
 const getLibrary = async (idLibrary) => {
   try {
     const library = await libraryModel.findByPk(idLibrary, {
+      attributes: ['id', 'name', 'location', 'phone'],
       where: { status: 'ENABLE' },
       include: [{ 
         all: true,
-        where: { status: "ENABLE" },
+        //where: { status: "ENABLE" },
         attributes: ['id', 'isbn', 'author', 'tittle', 'year']
       }]
     })
-    const { id, name, location, phone, Books} = library
-    return { id, name, location, phone, Books}
+    return library
   } catch(err) {
+    console.error(`Error al obtener la libreria con el id ${idLibrary}`, err)
+    throw err
+  }
+}
+
+const validadLibary = async (idLibrary) => {
+  try{
+    const library = await libraryModel.findByPk(idLibrary, {
+      where: { status: 'ENABLE' }
+    })
+    if (library != null) {
+      return true 
+    } else { return false}
+  } catch (err) {
     console.error(`Error al obtener la libreria con el id ${idLibrary}`, err)
     throw err
   }
@@ -57,7 +71,10 @@ const upDateLibrary = async (idLibrary, data) => {
     }, { 
       where: { id: idLibrary }
     })
-    return await libraryModel.findByPk(idLibrary)
+    const library = await libraryModel.findByPk(idLibrary, {
+      attributes: ['id', 'name', 'location', 'phone']
+    })
+    return library
   } catch(err) {
     console.error(`Error al actualizar la libreria con el id ${idLibrary}`, err)
     throw err
