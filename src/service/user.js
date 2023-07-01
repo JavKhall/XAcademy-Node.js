@@ -8,8 +8,8 @@ const getUsers = async () => {
   return await userProvider.getUsers ()
 }
 
-const getUser = async (idUser) => {
-  return await userProvider.getUser (idUser)
+const getUser = async (data) => {
+  return await userProvider.getUser (data)
 }
 
 const validateUser = async (options) => {

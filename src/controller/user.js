@@ -20,7 +20,7 @@ const getUsers = async (req, res) => {
 
 const getUser = async (req, res) => {
   try {
-    const user = await userService.getUser(req.params.id)
+    const user = await userService.getUser(req.params.data)
     res.json(user)
   } catch (err) {
     res.status(400).json({action: "getUser", error: err.message })

@@ -1,4 +1,5 @@
 const { userModel } = require('../model')
+const { Op } = require('sequelize')
 
 // * CREACION del usuario
 const createUser = async (user) => {
@@ -27,10 +28,17 @@ const getUsers = async () => {
 }
 
 // * OBTENCION un usuario
-const getUser = async (idUser) => {
+const getUser = async (data) => {
   try {
-    const user = await userModel.findByPk(idUser, {
-      where: { status: 'ENABLE' }
+    const user = await userModel.findOne({
+      where: {
+        status: 'ENABLE',
+        [Op.or]: [ 
+          { username: data },
+          { id: data }
+        ]
+      } 
+      
     })
     const { id, username, name, surname, email } = user
     return { id, username, name, surname, email }
@@ -39,6 +47,7 @@ const getUser = async (idUser) => {
     throw err
   }
 }
+
 
 const validateUser = async (options) => {
   try {
